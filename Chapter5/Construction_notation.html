@@ -1,0 +1,31 @@
+<!-- Example 8 uses a function to create objects using literal notation. Modify this example to use the
+Person data type. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+		function Person(firstName,lastName){
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+
+		Person.prototype.getFullName = function(){
+			return this.firstName + " " + this.lastName; 
+		}
+
+		Person.prototype.greet = function(person){
+			alert("Hello, "+person.getFullName()+"I'm "+this.getFullName());
+		}
+
+		var johnDoe = new Person("John", "Doe");
+		var janeDoe = new Person("John", "Doe");
+
+		johnDoe.greet(janeDoe);
+
+</script>
+</body>
+</html>
