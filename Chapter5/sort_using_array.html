@@ -1,0 +1,26 @@
+<!-- Obtain a list of names from the user, storing each name entered in an array. Keep getting another
+name until the user enters nothing. Sort the names in ascending order and then write them out to
+the page, with each name on its own line. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>
+		Chapter5:Question 2
+	</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var inputName = "";
+		var  namesArray = [];
+
+		while((inputName = prompt("Enter a name","")) != ""){
+			namesArray[namesArray.length] = inputName;
+		}
+
+		namesArray.sort();
+
+		var namesList = namesArray.join("<br/>");
+		document.write(namesList);
+	</script>
+
+</body>
