@@ -1,0 +1,41 @@
+<--
+Write a regular expression that finds all of the occurrences of the word “a” in the following sentence
+
+and replaces them with “the”:
+
+“a dog walked in off a street and ordered a finest beer”
+
+The sentence should become:
+
+“the dog walked in off the street and ordered the finest beer”
+-->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<title>Chapter 6: Question 2</title>
+
+</head>
+
+<body>
+
+<script>
+
+var myString = "a dog walked in off a street and " +
+
+"ordered a finest beer";
+
+var myRegExp = /\ba\b/gi;
+
+myString = myString.replace(myRegExp, "the");
+
+alert(myString);
+
+</script>
+
+</body>
+
+</html>
