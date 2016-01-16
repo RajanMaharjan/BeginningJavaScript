@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Centigrade to Fahrenheit</title>
+</head>
+<body>
+	<form action="" name="form1">
+		<p>Fahrenheit: <input type="text" name="txtCalBoxIn" value="0.0"></p>
+		<p>Centigrade: <input type="text" name="txtCalBoxOut" value="0.0"></p>
+
+		<input type="button" value="Convert to Centigrade" id="btnToCent" name="btnToCent">
+	</form>
+
+	<script type="text/javascript">
+		function convertToCentigrade(degFahren){
+			var degCent = 5 / 9 * (degFahren - 32);
+			return degCent;
+		}
+
+		function btnToCentClick(){
+			var calcBoxIn = document.form1.txtCalBoxIn;
+			var calcBoxOut = document.form1.txtCalBoxOut;
+
+
+			if(isNaN(calcBoxIn.value)==true || calcBoxIn.value == ""){
+				calcBoxOut.value = "Error!! Invalid Value."
+			}
+			else{
+				calcBoxOut.value = convertToCentigrade(calcBoxIn.value);
+			}
+		}
+		
+		document.getElementById("btnToCent").addEventListener("click",btnToCentClick);
+	</script>
+
+</body>
+</html>
