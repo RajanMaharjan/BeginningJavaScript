@@ -1,0 +1,115 @@
+<!-- Example 17 is incomplete because the script doesn’t keep track of which tab is active. Probably
+the simplest way to add state recognition to the script is to add a global variable that keeps track
+of the tab that was last clicked. This particular solution uses this idea. Changed lines of code are
+highlighted. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 10: Question 3</title>
+<style>
+	.tabStrip {
+	background-color: #E4E2D5;
+	padding: 3px;
+	height: 22px;
+	}
+	.tabStrip div {
+	float: left;
+	font: 14px arial;
+	cursor: pointer;
+	}
+	.tabStrip-tab {
+	padding: 3px;
+	}
+	.tabStrip-tab-hover {
+	border: 1px solid #316AC5;
+	background-color: #C1D2EE;
+	padding: 2px;
+	}
+	.tabStrip-tab-click {
+	border: 1px solid #facc5a;
+	background-color: #f9e391;
+	padding: 2px;
+	}
+</style>
+</head>
+	<body>
+		<div class="tabStrip">
+		<div data-tab-number="1" class="tabStrip-tab">Tab 1</div>
+		<div data-tab-number="2" class="tabStrip-tab">Tab 2</div>
+		<div data-tab-number="3" class="tabStrip-tab">Tab 3</div>
+		</div>
+	<div id="descContainer"></div>
+		<script>
+
+				var evt = {
+				addListener: function(obj, type, fn) {
+				if (typeof obj.addEventListener != "undefined") {
+					obj.addEventListener(type, fn);
+				} else {
+					obj.attachEvent("on" + type, fn);
+				}
+				},
+				removeListener: function(obj, type, fn) {
+				if (typeof obj.removeEventListener != "undefined") {
+					obj.removeEventListener(type, fn);
+				} else {
+					obj.detachEvent("on" + type, fn);
+				}
+				},
+				getTarget: function(e) {
+				if (e.target) {
+					return e.target;
+				}
+				return e.srcElement;
+				},
+				preventDefault : function(e) {
+				if (e.preventDefault) {
+					e.preventDefault();
+				} else {
+					e.returnValue = false;
+				}
+				},
+				isOldIE: function() {
+					return typeof document.addEventListener == "undefined";
+				}
+				};
+
+
+				var activeTab = null;
+				function handleEvent(e) {
+				var target = evt.getTarget(e);
+				switch (e.type) {
+				case "mouseover":
+				if (target.className == "tabStrip-tab") {
+					target.className = "tabStrip-tab-hover";
+				}
+				break;
+				case "mouseout":
+				if (target.className == "tabStrip-tab-hover") {
+					target.className = "tabStrip-tab";
+				}
+				break;
+				case "click":
+				if (target.className == "tabStrip-tab-hover") {
+				if (activeTab) {
+					activeTab.className = "tabStrip‐tab";
+				}
+				var num = target.getAttribute("data-tab-number");
+				target.className = "tabStrip-tab-click";
+				showDescription(num);
+				activeTab = target;
+				}
+				break;
+				}
+				}
+				function showDescription(num) {
+					var descContainer = document.getElementById("descContainer");
+					var text = "Description for Tab " + num;
+					descContainer.innerHTML = text;
+				}
+					evt.addListener(document, "mouseover", handleEvent);
+					evt.addListener(document, "mouseout", handleEvent);
+					evt.addListener(document, "click", handleEvent);
+		</script>
+</body>
+</html>
